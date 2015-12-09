@@ -1,16 +1,16 @@
 /* In this repo your job is to write functions to make each function call work properly.
-Below is a sample problem 
+Below is a sample problem
 
   //code here for sayHi
 
    sayHi('Hi Katie', function(thingToSay){
       alert(thingToSay);
    });
-   
 
-and what you should write is the sayHi function that makes the code above work, 
-    
-    
+
+and what you should write is the sayHi function that makes the code above work,
+
+
    var sayHi = function(str, cb){
     cb(str);
    }
@@ -18,14 +18,16 @@ and what you should write is the sayHi function that makes the code above work,
    sayHi('Hi Katie', function(thingToSay){
       alert(thingToSay); //should alert ('Hi Katie')'
    });
-    
-    
+
+
 */
 
 
 
   //Code Here for first
-  
+var first = function(name, callb) {
+    callb(name[0]);
+};
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -40,6 +42,10 @@ first(names, function(firstName){
 
 
   //Code Here for last
+
+var last = function(nm, cb) {
+  cb(nm[nm.length - 1]);
+};
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 last(names, function(lastName){
@@ -59,6 +65,10 @@ last(names, function(lastName){
 
   //Code Here for multiply
 
+var multiply = function(x, y, cb) {
+  cb(x * y);
+}
+
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
 })
@@ -74,6 +84,14 @@ multiply(4, 3, function(answer){
 
 
   //Code Here for contains
+
+var contains = function(nmArray, nm, cb) {
+  if (nmArray.indexOf(nm) !== -1) // if in array
+    cb(true);
+  else
+    cb(false);
+};
+
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 contains(names, 'Colt', function(result){
@@ -95,6 +113,16 @@ contains(names, 'Colt', function(result){
 
     //Code Here for uniq
 
+var uniq = function(nam, callb) {
+  for (var i = nam.length - 1; i >= 0; i--) {
+    for (var j = i - 1; j >= 0; j--) {
+      if (nam[i] === nam[j]) // if duplicate
+        nam.splice(j, 1)
+    }
+  }
+  callb(nam);
+}
+
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -110,6 +138,12 @@ uniq(names, function(uniqArr){
 
 
     //Code Here for each
+
+var each = function(nam, callb) {
+  for (var i = 0; i < nam.length; i++) {
+    callb(nam[i], i);
+  }
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 each(names, function(item, indice){
@@ -127,6 +161,15 @@ each(names, function(item, indice){
 
 
  //code here for getUserById
+
+var getUserById = function(user, key, callb) {
+  for (var i = 0; i < user.length; i++) {
+    if (user[i].id === key) {
+      callb(user[i]);
+      break;
+    }
+  }
+};
 
 var users = [
   {
@@ -150,5 +193,5 @@ var users = [
 ];
 
 getUserById(users, '16t', function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address);
 });
